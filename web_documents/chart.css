@@ -1,0 +1,15 @@
+#chart_bg, #chart_canvas {
+	position: absolute;
+	top     : 0;
+	botton  : 0;
+}
+
+#chart_canvas {
+	height: 250px;
+	width : 250px;
+}
+
+#change_types {
+	position: absolute;
+	left     : 250px;
+}
