@@ -1,6 +1,6 @@
 import tornado.ioloop
 import tornado.web
-from tornado import httpclient
+import tornado.websocket
 import os
 
 # Global variables
@@ -8,9 +8,11 @@ import os
 CHARTS              = []
 CONTROLERS          = []
 # We'll use the same folder for statics and templates.
-cwd                 = os.getcwd()
 template_path       = os.path.join(os.path.dirname(__file__), "templates")
 static_path         = os.path.join(os.path.dirname(__file__), "static")
+
+
+# Web event handlers.
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self, page_name):
@@ -18,6 +20,24 @@ class MainHandler(tornado.web.RequestHandler):
             self.set_header("Content-Type", "image/png")
             self._write_buffer.append(str(render_template(page_name)))
         else: self.write(render_template(page_name))
+
+class ChartHandler(tornado.websocket.WebSocketHandler):
+    def open(self):
+        CHARTS.append(self)
+    def on_message(self, message):
+        pass
+    def on_close(self):
+        try: CHARTS.remove(self)
+        except ValueError as e: print('Could not remove chart handler:', e)
+
+class ControllerHandler(tornado.websocket.WebSocketHandler):
+    def open(self):
+        CONTROLERS.append(self)
+    def on_message(self, message):
+        for chart in CHARTS: chart.write_message(message)
+    def on_close(self):
+        try: CONTROLERS.remove(self)
+        except ValueError as e: print('Could not remove controller handler:', e)
 
 
 # Global functions
@@ -43,6 +63,8 @@ def render_template(filename):
 def main():
     application = tornado.web.Application(
         [
+            (r"/chart_socket", ChartHandler),
+            (r"/cont_socket", ControllerHandler),
             (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": static_path}),
             (r"/(.*)", MainHandler),
         ],
