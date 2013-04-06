@@ -8,10 +8,12 @@ $(document).ready(function() {
 	$('input').val(start_value);
 
 	$('.slider').each(function() {
-		sliders.push($(this).slider({min: 0, max: 100, value: start_value}, {slide: function(event, ui) {
-			$(this).parents('tr').find('input').val(ui.value);
-			send_to_chart();
-		}}))
+		sliders.push($(this).slider({min: 0, max: 100, value: start_value, animate: 'fast'},
+			{slide: function(event, ui) {
+				$(this).parents('tr').find('input').val(ui.value);
+				send_to_chart();
+			}}
+		))
 	});
 
 	$('input').change(function() {
