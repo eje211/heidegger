@@ -35,6 +35,8 @@ class ControllerHandler(tornado.websocket.WebSocketHandler):
         CONTROLERS.append(self)
     def on_message(self, message):
         for chart in CHARTS: chart.write_message(message)
+        for cont in filter(lambda x: x != self, CONTROLERS):
+            cont.write_message(message)
     def on_close(self):
         try: CONTROLERS.remove(self)
         except ValueError as e: print('Could not remove controller handler:', e)

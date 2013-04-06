@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var ip_addr = '10.15.121.97',
+	var ip_addr = '192.168.2.3',
 		canvas = $('#chart_canvas').get(0).getContext('2d'),
 		c = 125; // Center. Used a lot. Needs to be short.
 		canvas.fillStyle = "rgba(0, 0, 192, 0.3)"
