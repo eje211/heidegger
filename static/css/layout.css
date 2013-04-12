@@ -8,7 +8,7 @@ body, html {
 }
 
 body {
-	background-image: url('images/background-tile.png');
+	background-image: url('/static/images/background-tile.png');
 }
 
 #content {
@@ -57,17 +57,17 @@ div#header li {
 }
 
 div#header #my_games_tab {
-	background   : transparent left center no-repeat url('images/slicesv2_14.png');
+	background   : transparent left center no-repeat url('/static/images/slicesv2_14.png');
 }
 
 div#header ul {
 	display: inline-block;
-	background: transparent right center no-repeat url('images/slicesv2_14.png');
+	background: transparent right center no-repeat url('/static/images/slicesv2_14.png');
 	padding: 0 3px 0 0;
 }
 
 div#header li {
-	background: transparent left center no-repeat url('images/slicesv2_12.png');
+	background: transparent left center no-repeat url('/static/images/slicesv2_12.png');
 	padding-left : transparent 3px;
 }
 
@@ -81,11 +81,11 @@ div#header li.arrow_button a {
 }
 
 div#header #go_left {
-	background: transparent url('images/slicesv2_08a.png') no-repeat -12px -8px;
+	background: transparent url('/static/images/slicesv2_08a.png') no-repeat -12px -8px;
 }
 
 div#header #go_right {
-	background: transparent url('images/slicesv2_08b.png') no-repeat 5px -8px;
+	background: transparent url('/static/images/slicesv2_08b.png') no-repeat 5px -8px;
 }
 
 div#subheader {
@@ -170,7 +170,7 @@ div.popup_inner {
 	/* arrow-specific -- overwritten by Javascript. */
 	margin       : 0 0 0 -25px;
 	padding      : 0 0 0 25px;
-	background   : transparent url('images/popup_arrow.png') no-repeat left 20px;
+	background   : transparent url('/static/images/popup_arrow.png') no-repeat left 20px;
 }
 
 div.popup_body {
@@ -189,7 +189,7 @@ div.popup h2 {
 	font-family: "Arial";
 	margin: -5px 0 0 -25px;
 	display: block;
-	background: url('images/popup-header.png') no-repeat left top;
+	background: url('/static/images/popup-header.png') no-repeat left top;
 }
 
 /* Required by http://www.methvin.com/splitter/index.html */
@@ -219,7 +219,7 @@ div.popup h2 {
 	top        :-8px;
 	margin-left:-12px;
 	z-index    :200;
-	background : url('images/05-sliderbar-button.png') no-repeat 0px 0.1em;
+	background : url('/static/images/05-sliderbar-button.png') no-repeat 0px 0.1em;
 	border     : none;
 }
 
@@ -244,7 +244,7 @@ div.popup h2 {
 }
 
 #subheader .align_right {
-	background: transparent url('images/05-sliderbar-bg.png') no-repeat left -1px;
+	background: transparent url('/static/images/05-sliderbar-bg.png') no-repeat left -1px;
 }
 
 #sidebar {
@@ -252,7 +252,7 @@ div.popup h2 {
 	float     : right;
 	top       : 0px;
 	right     : 0;
-	background: white left center repeat-y url('images/sidebar-border.png');
+	background: white left center repeat-y url('/static/images/sidebar-border.png');
 	display   : none;
 	width     : 300px;
 	padding   : 0 0 0 6px;

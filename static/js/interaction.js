@@ -59,12 +59,12 @@ $(document).ready(function() {
 				css('margin', '0 25px 0 0').children().
 				css('margin', '0 -25px 0 0').
 				css('padding', '0 25px 0 0').
-				css('background', 'transparent url("images/popup_arrow_r.png") no-repeat right 20px');
+				css('background', 'transparent url("static/images/popup_arrow_r.png") no-repeat right 20px');
 		else popup.css('left', SHIFT_RIGHT).
 				css('margin', '0 0 0 25px').children().
 				css('margin', '0 0 0 -25px').
 				css('padding', '0 0 0 25px').
-				css('background', 'transparent url("images/popup_arrow.png") no-repeat left 20px');
+				css('background', 'transparent url("static/images/popup_arrow.png") no-repeat left 20px');
 	}
 
 	function number_of_games_per_row() {

@@ -3,6 +3,7 @@ import tornado.web
 import tornado.websocket
 import os
 
+
 # Global variables
 # Yes, we need some!
 CHARTS        = []
@@ -36,7 +37,7 @@ class ChartHandler(tornado.websocket.WebSocketHandler):
         try: CHARTS.remove(self)
         except ValueError as e: print('Could not remove chart handler:', e)
 
-class ControllerHandler(tornado.websocket.WebSocketHandler):~
+class ControllerHandler(tornado.websocket.WebSocketHandler):
     '''
     Get every change from each controller and send it back to all the other
     controllers, if there are any. That way, if other controllers make a
@@ -52,6 +53,16 @@ class ControllerHandler(tornado.websocket.WebSocketHandler):~
         try: CONTROLERS.remove(self)
         except ValueError as e: print('Could not remove controller handler:', e)
 
+class StaticFileHandlerExtra(tornado.web.StaticFileHandler):
+    '''
+    A customized StaticFileHandler that fixes issues with the MIME types
+    on Windows
+    '''
+    def initialize(self, path, default_filename=None):
+        import mimetypes
+        mimetypes.init()
+        mimetypes.add_type('image/png', '.png')
+        tornado.web.StaticFileHandler.initialize(self, path, default_filename)
 
 # Global functions
 
@@ -78,13 +89,13 @@ def render_template(filename):
     except FileNotFoundError:
         raise tornado.web.HTTPError(404)
 
-# Get the whole thing running!
+# Get the whole thing running
 def main():
     application = tornado.web.Application(
         [
             (r"/chart_socket", ChartHandler),
             (r"/cont_socket",  ControllerHandler),
-            (r"/static/(.*)",  tornado.web.StaticFileHandler, {"path": static_path}),
+            (r"/static/(.*)",  StaticFileHandlerExtra, {"path": static_path}),
             (r"/(.*)",         MainHandler),
         ],
         template_path = template_path,
