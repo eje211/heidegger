@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var ip_addr = '192.168.2.3',
+	var ip_addr = '10.15.121.97',
 		ws = new WebSocket("ws://" + ip_addr + ":8887/cont_socket"),
 	    start_value = 50,
 		sliders = [];

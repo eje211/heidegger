@@ -11,6 +11,8 @@
 	<script type="text/javascript"
 		src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="static/js/interaction.js"></script>
+	<script type="text/javascript" src="static/js/json.js"></script>
+	<script type="text/javascript" src="static/js/chart.js"></script>
 </head>
 <body>
 	<div id="header"><div>
@@ -96,7 +98,11 @@
 				</div></div></div>
 			</div>
 		</div></div><!-- id=games_inner, id=games -->
-		<div id="sidebar"><img src='static/images/sidebar-placeholder.png'></div>
+		<div id="sidebar">
+			<img src="static/images/background.png" id="chart_bg" />
+			<canvas id="chart_canvas" width="260" height="260"></canvas>
+			<img src="static/images/suggestions.png" id="suggestions" />
+		</div>
 	</div><!-- id=content -->
 </body>
 </html>

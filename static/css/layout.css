@@ -252,7 +252,8 @@ div.popup h2 {
 	float     : right;
 	top       : 0px;
 	right     : 0;
-	background: white left center repeat-y url('/static/images/sidebar-border.png');
+	/* background: white left center repeat-y url('/static/images/sidebar-border.png'); */
+	background: url('/static/images/bg_tile_lite.png');
 	display   : none;
 	width     : 300px;
 	padding   : 0 0 0 6px;
@@ -289,4 +290,24 @@ div.popup h2 {
 #subheader .align_left ul li#refresh_button {
 	margin: 7px 20px -13px 30px;
 	padding: 0;
+}
+
+#chart_canvas , #chart_bg {
+	margin  : 20px 0 0 20px; 
+	height  : 260px;
+	width   : 260px;
+	position: absolute;
+	top     : 0;
+}
+
+#chart_canvas {
+	z-index : 10;
+}
+
+#chart_bg {
+	z-index : 1;
+}
+
+#suggestions {
+	margin-top: 300px;
 }
