@@ -20,7 +20,7 @@ $(document).ready(function() {
 		sliders.push($(this).slider({min: 0, max: 100, value: start_value},
 			{slide: function(event, ui) {
 				$(event.target).parents('tr').find('input').val(ui.value);
-				send_to_chart();
+				send_to_chart([$(event.target).attr('id').charAt(0), ui.value]);
 			}}
 		))
 	});
@@ -30,13 +30,13 @@ $(document).ready(function() {
 		send_to_chart();
 	});
 
-	function send_to_chart() {
+	function send_to_chart(extra) {
 		var message = {};
 		$(sliders).each(function() {
-			var input = $(this).parents('tr').find('input');
-			message[$(input).attr('id').charAt(0)] =
-				parseInt($(input).val());
+			message[$(this).attr('id').charAt(0)] =
+				parseInt($(this).slider('value'));
 		});
+		if (extra != undefined) message[extra[0]] = extra[1];
 		ws.send(JSON.stringify(message));
 	}
 
