@@ -78,7 +78,7 @@ def render_template(filename):
     '''
     # Is a directory.
     if os.path.isdir(os.path.join(template_path, filename)):
-        filename = os.path.join(filename, 'index.html')
+        filename = os.path.join(template_path, filename, 'index.html')
     # Is a page.
     else:
         filename = '%s.html' % filename
