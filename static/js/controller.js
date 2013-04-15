@@ -1,19 +1,20 @@
 $(document).ready(function() {
 
 	// var ip_addr = '10.15.121.97',
-	var ip_addr = '',
-		ws = new WebSocket("ws://" + ip_addr + ":8887/cont_socket"),
-	    start_value = 50,
-		sliders = [];
-	ip_addr.load('/ip');
-
-	ws.onmessage = function(evt) {
-		var d = JSON.parse(evt.data);
-		for (var k in d) {
-			$('#' + k + '-slider').slider('value', parseInt(d[k]));
-			$('#' + k + '-box').val(d[k]);
-		}
-	}
+	var ws          = '',
+		start_value = 50,
+		sliders     = [];
+	$.get('/ip', function(ip) {
+		ws = new WebSocket("ws://" + ip + ":8887/cont_socket");
+		ws.onmessage = function(evt) {
+			if (ws == '') return;
+			var d = JSON.parse(evt.data);
+			for (var k in d) {
+				$('#' + k + '-slider').slider('value', parseInt(d[k]));
+				$('#' + k + '-box').val(d[k]);
+			}
+		};
+	});
 
 	$('input').val(start_value);
 
@@ -32,6 +33,7 @@ $(document).ready(function() {
 	});
 
 	function send_to_chart(extra) {
+		if (ws == '') return;
 		var message = {};
 		$(sliders).each(function() {
 			message[$(this).attr('id').charAt(0)] =

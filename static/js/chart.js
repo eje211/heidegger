@@ -1,10 +1,9 @@
 $(document).ready(function() {
 
 	// var ip_addr = '10.15.121.97',
-	var ip_addr = '',
+	var ws = '',
 		canvas = $('#chart_canvas').get(0).getContext('2d'),
 		c = 130, // Center. Used a lot. Needs to be short.
-		ws = new WebSocket("ws://" + ip_addr + ":8887/chart_socket"),
 		color = {
 			a: "rgba(251, 146,   0, 0.6)",
 			e: "rgba(106, 199,  81, 0.8)",
@@ -13,31 +12,34 @@ $(document).ready(function() {
 			d: "rgba( 84,  84,  84, 0.7)", // default
 		},
 		d = {};
-	ip_addr.load('/ip');
+	$.get('/ip', function(ip) {
+		ws = new WebSocket("ws://" + ip + ":8887/chart_socket");
+		ws.onmessage = function(evt) {
+			d = JSON.parse(evt.data);
+			canvas.fillStyle = "rgba(84, 84, 84, 0.6)"
+			canvas.strokeStyle = "rgba(248, 213, 0, 0.7)";
+			canvas.clearRect(0, 0, 250, 250);
+			canvas.beginPath();
+			canvas.moveTo(c - d['k'], c - d['k']);
+			canvas.lineTo(c - d['s'], c + d['s']);
+			canvas.lineTo(c + d['e'], c + d['e']);
+			canvas.lineTo(c + d['a'], c - d['a']);
+			canvas.closePath();
+			canvas.fill();
+			canvas.stroke();
+			var values = Object.keys(d).map(function(k) {return parseInt(d[k])});
+			for (var type in d)
+				drawNum(d[type], type, d[type] == Math.max.apply(null, values))
+			return false;
+		};
+		ws.send();
+	});
 
 	canvas.font = '50px Arial';
 	canvas.lineWidth = 2;
 	canvas.textAlign = 'center';
   	canvas.textBaseline = 'middle';
 
-	ws.onmessage = function(evt) {
-		d = JSON.parse(evt.data);
-		canvas.fillStyle = "rgba(84, 84, 84, 0.6)"
-		canvas.strokeStyle = "rgba(248, 213, 0, 0.7)";
-		canvas.clearRect(0, 0, 250, 250);
-		canvas.beginPath();
-		canvas.moveTo(c - d['k'], c - d['k']);
-		canvas.lineTo(c - d['s'], c + d['s']);
-		canvas.lineTo(c + d['e'], c + d['e']);
-		canvas.lineTo(c + d['a'], c - d['a']);
-		canvas.closePath();
-		canvas.fill();
-		canvas.stroke();
-		var values = Object.keys(d).map(function(k) {return parseInt(d[k])});
-		for (var type in d)
-			drawNum(d[type], type, d[type] == Math.max.apply(null, values))
-		return false;
-	}
 
 	$('#chart_submit').click(function() {
 		var e = parseInt($('#explorer'  ).val()),

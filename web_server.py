@@ -10,6 +10,7 @@ CHARTS        = []
 CONTROLERS    = []
 template_path = os.path.join(os.path.dirname(__file__), "templates")
 static_path   = os.path.join(os.path.dirname(__file__), "static")
+messagec      = '' # For caching.
 
 
 # Web event handlers.
@@ -28,6 +29,7 @@ class IPHandler(tornado.web.RequestHandler):
     ''' 
     def get(self, page_name):
       import socket
+      self.set_header("Content-Type", 'text/plain')
       self.write(socket.gethostbyname(socket.gethostname()))
 
 # The main functions of the two following classes COULD be merged into
@@ -41,7 +43,8 @@ class ChartHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         CHARTS.append(self)
     def on_message(self, message):
-        pass
+        self.write(messagec if messagec != '' else
+            {'e': '50', 'a': '50', 'k': '50', 's': '50'});
     def on_close(self):
         try: CHARTS.remove(self)
         except ValueError as e: print('Could not remove chart handler:', e)
@@ -55,6 +58,7 @@ class ControllerHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         CONTROLERS.append(self)
     def on_message(self, message):
+        messagec = message
         for chart in CHARTS: chart.write_message(message)
         for cont in filter(lambda x: x != self, CONTROLERS):
             cont.write_message(message)
@@ -67,11 +71,13 @@ class StaticFileHandlerExtra(tornado.web.StaticFileHandler):
     A customized StaticFileHandler that fixes issues with the MIME types
     on Windows
     '''
-    def initialize(self, path, default_filename=None):
-        import mimetypes
-        mimetypes.init()
-        mimetypes.add_type('image/png', '.png')
-        tornado.web.StaticFileHandler.initialize(self, path, default_filename)
+    # def initialize(self, path, default_filename=None):
+    #     import mimetypes
+    #     mimetypes.init()
+    #     mimetypes.add_type('image/png', '.png')
+    #     tornado.web.StaticFileHandler.initialize(self, path, default_filename)
+    def set_extra_headers(self, path):
+        if path.endsWith('.png'): self.set_header("Content-Type", 'image/png')
 
 # Global functions
 
@@ -102,7 +108,7 @@ def render_template(filename):
 def main():
     application = tornado.web.Application(
         [
-            (r"/ip",           IPHandler),
+            (r"/ip()",         IPHandler),
             (r"/chart_socket", ChartHandler),
             (r"/cont_socket",  ControllerHandler),
             (r"/static/(.*)",  StaticFileHandlerExtra, {"path": static_path}),
