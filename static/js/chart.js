@@ -32,7 +32,6 @@ $(document).ready(function() {
 				drawNum(d[type], type, d[type] == Math.max.apply(null, values))
 			return false;
 		};
-		ws.send();
 	});
 
 	canvas.font = '50px Arial';

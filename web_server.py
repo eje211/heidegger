@@ -10,7 +10,7 @@ CHARTS        = []
 CONTROLERS    = []
 template_path = os.path.join(os.path.dirname(__file__), "templates")
 static_path   = os.path.join(os.path.dirname(__file__), "static")
-messagec      = '' # For caching.
+messagec      = False # For caching.
 
 
 # Web event handlers.
@@ -42,9 +42,9 @@ class ChartHandler(tornado.websocket.WebSocketHandler):
     '''
     def open(self):
         CHARTS.append(self)
-    def on_message(self, message):
-        self.write(messagec if messagec != '' else
-            {'e': '50', 'a': '50', 'k': '50', 's': '50'});
+        if messagec: self.write_message(messagec)
+        else: self.write_message(
+            '{"e": 50, "a": 50, "k": 50, "s": 50}')
     def on_close(self):
         try: CHARTS.remove(self)
         except ValueError as e: print('Could not remove chart handler:', e)
@@ -57,7 +57,11 @@ class ControllerHandler(tornado.websocket.WebSocketHandler):
     '''
     def open(self):
         CONTROLERS.append(self)
+        if messagec: self.write_message(messagec)
+        else: self.write_message(
+            '{"e": 50, "a": 50, "k": 50, "s": 50}')
     def on_message(self, message):
+        global messagec
         messagec = message
         for chart in CHARTS: chart.write_message(message)
         for cont in filter(lambda x: x != self, CONTROLERS):
