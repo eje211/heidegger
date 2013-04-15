@@ -54,7 +54,7 @@ $(document).ready(function() {
 		game_cover = $(game_cover); // Just to be 100% sure.
 		var popup = game_cover.parents().eq(1).children('.popup');
 		if (game_cover.offset().left + RIGHT + popup.outerWidth() + 25 >
-			$('#sidebar').offset().left)
+			($('#sidebar').offset().left || $('#games').outerWidth()))
 				popup.css('left', SHIFT_LEFT).
 				css('margin', '0 25px 0 0').children().
 				css('margin', '0 -25px 0 0').
@@ -277,7 +277,7 @@ $(document).ready(function() {
 
 	// Initialize the margins from the slider, now that we have one.
 	adjust_margin($('#slider').slider('option', 'value'));
-
+	
 	// make_resizable();
 
 	//////////////////////////////////////////////////////////////////////////
