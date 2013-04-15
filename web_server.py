@@ -21,6 +21,15 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self, page_name):
         self.write(render_template(page_name))
 
+
+class IPHandler(tornado.web.RequestHandler):
+    '''
+    Just diplay the host's IP address.
+    ''' 
+    def get(self, page_name):
+      import socket
+      self.write(socket.gethostbyname(socket.gethostname()))
+
 # The main functions of the two following classes COULD be merged into
 # one class from which they'd inherit, but for now, it would probably
 # mostly make things more confusing. So let's leave things as they are.
@@ -93,6 +102,7 @@ def render_template(filename):
 def main():
     application = tornado.web.Application(
         [
+            (r"/ip",           IPHandler),
             (r"/chart_socket", ChartHandler),
             (r"/cont_socket",  ControllerHandler),
             (r"/static/(.*)",  StaticFileHandlerExtra, {"path": static_path}),

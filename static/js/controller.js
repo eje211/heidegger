@@ -1,10 +1,11 @@
 $(document).ready(function() {
 
-	var ip_addr = '10.15.121.97',
+	// var ip_addr = '10.15.121.97',
+	var ip_addr = '',
 		ws = new WebSocket("ws://" + ip_addr + ":8887/cont_socket"),
 	    start_value = 50,
 		sliders = [];
-
+	ip_addr.load('/ip');
 
 	ws.onmessage = function(evt) {
 		var d = JSON.parse(evt.data);

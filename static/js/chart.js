@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-	var ip_addr = '10.15.121.97',
+	// var ip_addr = '10.15.121.97',
+	var ip_addr = '',
 		canvas = $('#chart_canvas').get(0).getContext('2d'),
 		c = 130, // Center. Used a lot. Needs to be short.
 		ws = new WebSocket("ws://" + ip_addr + ":8887/chart_socket"),
@@ -12,6 +13,7 @@ $(document).ready(function() {
 			d: "rgba( 84,  84,  84, 0.7)", // default
 		},
 		d = {};
+	ip_addr.load('/ip');
 
 	canvas.font = '50px Arial';
 	canvas.lineWidth = 2;
