@@ -295,8 +295,8 @@ div.popup h2 {
 #chart_canvas , #chart_bg {
 	margin  : 20px 0 0 20px; 
 	height  : 260px;
-	width   : 260px;
-	position: absolute;
+	width   : 260px
+;	position: absolute;
 	top     : 0;
 }
 
@@ -313,7 +313,7 @@ div.popup h2 {
 }
 
 div.game_cover.glow {
-	-webkit-box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
-	-moz-box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
-	box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
+	-webkit-box-shadow: 0px 0px 30px 10px rgba(222, 166, 44, 1);
+	-moz-box-shadow   : 0px 0px 30px 10px rgba(222, 166, 44, 1);
+	box-shadow        : 0px 0px 30px 10px rgba(222, 166, 44, 1);
 }
