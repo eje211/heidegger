@@ -27,9 +27,22 @@ $(document).ready(function() {
 			canvas.closePath();
 			canvas.fill();
 			canvas.stroke();
-			var values = Object.keys(d).map(function(k) {return parseInt(d[k])});
+			var max = _.chain(d).values().max().value();
 			for (var type in d)
-				drawNum(d[type], type, d[type] == Math.max.apply(null, values))
+				drawNum(d[type], type, d[type] == max);
+			// If all values are 50:
+			if (_.chain(d).
+				map(function(x) {return x == 50}).
+				reduce(function(a, b) {return a && b}, true).
+				value()) {
+				$('#ds3').removeClass('glow');
+				$('#aot3').hide();
+			}
+			else {
+				$('#ds3').addClass('glow');
+				if (d['s'] == max || d['a'] == max)
+					$('#aot3').show();
+			}
 			return false;
 		};
 	});
@@ -75,4 +88,7 @@ $(document).ready(function() {
 		canvas.fillText(num, x, y);
 
 	}
+
+}
+
 });

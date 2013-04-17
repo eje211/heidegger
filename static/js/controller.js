@@ -32,6 +32,12 @@ $(document).ready(function() {
 		send_to_chart();
 	});
 
+	$('#reset').click(function() {
+		$('.slider').slider('value', 50);
+		$('input').val(50);
+		send_to_chart();
+	});
+
 	function send_to_chart(extra) {
 		if (ws == '') return;
 		var message = {};
