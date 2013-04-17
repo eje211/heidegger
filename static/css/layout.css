@@ -144,7 +144,7 @@ div.game_cover_wrapper2 {
 div.game_cover {
 	width             : 265px;
 	height            : 375px;
-	background-color  : green;
+	background-color  : transparent;
 	text-align        : left;
 	display           : inline-block;
 	position          : relative;
