@@ -1,7 +1,6 @@
-@font-face
-{
-font-family: Kalvika;
-src: url('/static/fonts/Klavika_Basic_Regular.otf');
+@font-face {
+	font-family: Kalvika;
+	src: url('/static/fonts/klavika_basic_regular.otf');
 }
 
 body, html, ul, li, form, div {
@@ -74,7 +73,7 @@ div#header ul {
 
 div#header li {
 	background: transparent left center no-repeat url('/static/images/slicesv2_12.png');
-	padding-left : transparent 3px;
+	/* padding-left : transparent 3px; */
 }
 
 div#header li.arrow_button {
