@@ -34,7 +34,10 @@ $(document).ready(function() {
 		// Class variable.
 		// Current state of the recommendation display: [H]idden,
 		// [S]idebar or full [W]indow.
-		recom_stat  = 'H';
+			recom_stat  = 'H';
+
+	// Hide AoT ASAP!!
+	$('#aot3').hide();
 
 	function update_constants() {
 		RIGHT       = $('.game_cover').width() - SHIFT;

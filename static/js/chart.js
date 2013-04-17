@@ -12,6 +12,7 @@ $(document).ready(function() {
 			d: "rgba( 84,  84,  84, 0.7)", // default
 		},
 		d = {};
+
 	$.get('/ip', function(ip) {
 		ws = new WebSocket("ws://" + ip + ":8887/chart_socket");
 		ws.onmessage = function(evt) {
@@ -35,13 +36,14 @@ $(document).ready(function() {
 				map(function(x) {return x == 50}).
 				reduce(function(a, b) {return a && b}, true).
 				value()) {
-				$('#ds3').removeClass('glow');
+				$('#ds3 .game_cover').removeClass('glow');
 				$('#aot3').hide();
 			}
 			else {
-				$('#ds3').addClass('glow');
+				$('#ds3 .game_cover').addClass('glow');
 				if (d['s'] == max || d['a'] == max)
-					$('#aot3').show();
+					$('#aot3').fadeIn();
+				else $('#aot3').hide();
 			}
 			return false;
 		};
@@ -88,7 +90,5 @@ $(document).ready(function() {
 		canvas.fillText(num, x, y);
 
 	}
-
-}
 
 });
