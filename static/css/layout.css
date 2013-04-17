@@ -285,7 +285,8 @@ div.popup h2 {
 #subheader .align_left ul li {
 	list-style : none;
 	display    : inline-block;
-	font-family: "Arial Bold";
+	font-family: "Arial";
+	font-weight: bold;
 	font-size  : 12.5px;
 	margin     : 12px 13px 0 0;
 	float      : left;
