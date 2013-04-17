@@ -1,7 +1,12 @@
 @font-face {
-	font-family: KalvikaOrigin;
-	src: url('/static/fonts/klavika_basic_regular.woff'),
-	     url('/static/fonts/klavika_basic_regular.oft' );
+    font-family: 'klavika_basic_regularregular';
+    src: url('static/fonts/klavika_basic_regular-webfont.eot');
+    src: url('static/fonts/klavika_basic_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('static/fonts/klavika_basic_regular-webfont.woff') format('woff'),
+         url('static/fonts/klavika_basic_regular-webfont.ttf') format('truetype'),
+         url('static/fonts/klavika_basic_regular-webfont.svg#klavika_basic_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body, html, ul, li, form, div {
@@ -39,6 +44,7 @@ div#header {
 	font-family     : KlavikaOrigin;
 	color           : #b6b6b6;
 }
+
 div#header div {
 	padding: 0 0 0 10px; 
 }
