@@ -1,9 +1,4 @@
 @font-face {
-<<<<<<< HEAD
-	font-family: KalvikaOrigin;
-	src: url('/static/fonts/klavika_basic_regular.woff'),
-	     url('/static/fonts/klavika_basic_regular.oft' );
-=======
     font-family: 'klavika_basic_regular';
     src: url('/static/fonts/klavika_basic_regular-webfont.eot');
     src: url('/static/fonts/klavika_basic_regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -12,7 +7,6 @@
          url('/static/fonts/klavika_basic_regular-webfont.svg#klavika_basic_regularregular') format('svg');
     font-weight: normal;
     font-style: normal;
->>>>>>> c424e9a82ea293fe67141e79b909c5ccd2eae2c5
 }
 
 body, html, ul, li, form, div {
