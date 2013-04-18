@@ -43,7 +43,7 @@ $(document).ready(function() {
 				$('#ds3 .game_cover').addClass('glow');
 				if (d['s'] == max || d['a'] == max)
 					$('#aot3').fadeIn();
-				else $('#aot3').hide();
+				else $('#aot3').fadeOut();
 			}
 			return false;
 		};

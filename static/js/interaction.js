@@ -128,8 +128,8 @@ $(document).ready(function() {
 	function toggle_sidebar(event, ui) {
 		// Toggle status first.
 		if (recom_stat == 'S')      // Sidebar
-			recom_stat = 'W';       // Window
-		else if (recom_stat == 'W') // Window
+		// 	recom_stat = 'W';       // Window
+		// else if (recom_stat == 'W') // Window
 			recom_stat = 'H';       // Hidden
 		else recom_stat = 'S';      // Sidebar
 
