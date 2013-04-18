@@ -27,7 +27,7 @@ class IPHandler(tornado.web.RequestHandler):
     '''
     Just diplay the host's IP address.
     ''' 
-    def get(self, page_name):
+    def get(self, page_name=None):
       import socket
       self.set_header("Content-Type", 'text/plain')
       self.write(socket.gethostbyname(socket.gethostname()))
@@ -73,15 +73,11 @@ class ControllerHandler(tornado.websocket.WebSocketHandler):
 class StaticFileHandlerExtra(tornado.web.StaticFileHandler):
     '''
     A customized StaticFileHandler that fixes issues with the MIME types
-    on Windows
+    on Windows.
     '''
-    # def initialize(self, path, default_filename=None):
-    #     import mimetypes
-    #     mimetypes.init()
-    #     mimetypes.add_type('image/png', '.png')
-    #     tornado.web.StaticFileHandler.initialize(self, path, default_filename)
     def set_extra_headers(self, path):
         if path.endsWith('.png'): self.set_header("Content-Type", 'image/png')
+
 
 # Global functions
 
@@ -112,7 +108,7 @@ def render_template(filename):
 def main():
     application = tornado.web.Application(
         [
-            (r"/ip()",         IPHandler),
+            (r"/ip",           IPHandler),
             (r"/chart_socket", ChartHandler),
             (r"/cont_socket",  ControllerHandler),
             (r"/static/(.*)",  StaticFileHandlerExtra, {"path": static_path}),
